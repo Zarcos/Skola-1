@@ -6,6 +6,7 @@ import hra.Hrac;
 import hra.HraciPlocha;
 
 public enum Obrazek {
+	
 	HRAC("hrac", Hrac.SIRKA, Hrac.VYSKA, new Color(255,255,255)),
 	POZADI("pozadi", HraciPlocha.SIRKA*3, HraciPlocha.VYSKA, new Color(0,0,150));
 	

@@ -6,12 +6,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import obrazek.Obrazek;
+import obrazek.ZdrojObrazkuSoubor;
+
 public class HraciPlocha extends JPanel {
 	private static final long serialVersionUID = 1L;
+	
 	public static final int VYSKA = 800;
 	public static final int SIRKA = 600;
 	public static final int RYCHLOST = -2;
@@ -19,17 +24,27 @@ public class HraciPlocha extends JPanel {
 	private BufferedImage imgPozadi;
 	private Timer casovacAnimace;
 	private boolean pauza = false;
-	private boolean hraBezi = true;
+	private boolean hraBezi = false;
 	private int posunPozadi = 0;
 	
 	public HraciPlocha() {
+		ZdrojObrazkuSoubor z = new ZdrojObrazkuSoubor();
+		z.naplnMapu();
+		z.setZdroj(Obrazek.POZADI.getKlic());
 		
+		try {
+			imgPozadi = z.getObrazek();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void paint(Graphics g) {
 		super.paint(g);
 		
+		//prvni obrazek
 		g.drawImage(imgPozadi, posunPozadi, 0, null);
+		//druhy obrazek posunuty
 		g.drawImage(imgPozadi, posunPozadi+imgPozadi.getWidth(), 0, null);
 	}
 	
